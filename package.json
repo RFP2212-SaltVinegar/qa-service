@@ -1,0 +1,32 @@
+{
+  "name": "sdc-atelier",
+  "version": "1.0.0",
+  "description": "Hack Reactor 2212 SDC Project",
+  "main": "index.js",
+  "scripts": {
+    "server-dev": "npx nodemon --watch server server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RFP2212-SaltVinegar/sdc-atelier.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RFP2212-SaltVinegar/sdc-atelier/issues"
+  },
+  "homepage": "https://github.com/RFP2212-SaltVinegar/sdc-atelier#readme",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "nodemon": "^2.0.20"
+  }
+}
