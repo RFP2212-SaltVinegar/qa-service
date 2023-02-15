@@ -4,7 +4,8 @@
   "description": "Hack Reactor 2212 SDC Project",
   "main": "index.js",
   "scripts": {
-    "server-dev": "npx nodemon --watch server server/index.js"
+    "server-dev": "npx nodemon --watch server server/index.js",
+    "eslint-dev": "npx eslint ."
   },
   "repository": {
     "type": "git",
