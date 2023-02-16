@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS questionAnswer;
 
 CREATE DATABASE questionAnswer;
 
-\c questionsandanswers;
+\c questionAnswer;
 
 CREATE TABLE questions {
   id SERIAL PRIMARY KEY NOT NULL,
