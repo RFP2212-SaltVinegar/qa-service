@@ -10,9 +10,15 @@ CREATE TABLE questions (
   body VARCHAR(1000),
   date_added VARCHAR(20),
   asker VARCHAR(60),
+  email VARCHAR(100),
   reported BOOLEAN DEFAULT FALSE,
   helpful INTEGER DEFAULT 0
 );
+
+COPY questions
+FROM '/Users/archaareads/Documents/Code/SDC/qa-service/db/data/questions.csv'
+DELIMITER ','
+HEADER csv;
 
 CREATE TABLE answers (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -20,19 +26,25 @@ CREATE TABLE answers (
   body VARCHAR (1000),
   date_added VARCHAR(20),
   answerer VARCHAR(60),
+  email VARCHAR(100),
   reported BOOLEAN DEFAULT FALSE,
   helpful INTEGER DEFAULT 0,
   FOREIGN KEY (question_id) REFERENCES questions(id)
 );
 
 COPY answers
-FROM '/Users/archaareads/Documents/Code/SDC/qa-service/db/testETLTransformed.csv'
+FROM '/Users/archaareads/Documents/Code/SDC/qa-service/db/data/answers.csv'
 DELIMITER ','
 HEADER csv;
 
 CREATE TABLE answer_photos (
   id SERIAL PRIMARY KEY NOT NULL,
   answer_id INTEGER,
-  url TEXT,
+  url VARCHAR(2048),
   FOREIGN KEY (answer_id) REFERENCES answers(id)
 );
+
+COPY answer_photos
+FROM '/Users/archaareads/Documents/Code/SDC/qa-service/db/data/answersPhotosTransformed.csv'
+DELIMITER ','
+HEADER csv;
