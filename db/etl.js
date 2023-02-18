@@ -8,35 +8,35 @@ const transformBody = (body) => {
   return trimmedBody;
 }
 
-// csvToJSON().fromFile('db/data/questions.csv')
-//   .then((testFile) => {
-//     fs.writeFileSync('db/data/questionsTransformed.csv', jsonToCsv(testFile.map(row => {
-//       return {
-//         id:row.id,
-//         product_id: row.question_id,
-//         body: transformBody(row.body),
-//         date_added: row.date_written,
-//         asker: row.asker_name,
-//         reported: row.reported,
-//         helpful: row.helpful
-//       }
-//     }), { fields: ['id', 'product_id', 'body', 'date_added', 'asker', 'reported', 'helpful']}));
-//   } )
+csvToJSON().fromFile('db/data/questions.csv')
+  .then((testFile) => {
+    fs.writeFileSync('db/data/questionsTransformed.csv', jsonToCsv(testFile.map(row => {
+      return {
+        id:row.id,
+        product_id: row.question_id,
+        body: transformBody(row.body),
+        date_added: row.date_written,
+        asker: row.asker_name,
+        reported: row.reported,
+        helpful: row.helpful
+      }
+    }), { fields: ['id', 'product_id', 'body', 'date_added', 'asker', 'reported', 'helpful']}));
+  } )
 
-// csvToJSON().fromFile('db/data/answers.csv')
-//   .then((testFile) => {
-//     fs.writeFileSync('db/data/answersTransformed.csv', jsonToCsv(testFile.map(row => {
-//       return {
-//         id:row.id,
-//         question_id: row.question_id,
-//         body: transformBody(row.body),
-//         date_added: row.date_written,
-//         answerer: row.answerer_name,
-//         reported: row.reported,
-//         helpful: row.helpful
-//       }
-//     }), { fields: ['id', 'question_id', 'body', 'date_added', 'answerer', 'reported', 'helpful']}));
-//   } )
+csvToJSON().fromFile('db/data/answers.csv')
+  .then((testFile) => {
+    fs.writeFileSync('db/data/answersTransformed.csv', jsonToCsv(testFile.map(row => {
+      return {
+        id:row.id,
+        question_id: row.question_id,
+        body: transformBody(row.body),
+        date_added: row.date_written,
+        answerer: row.answerer_name,
+        reported: row.reported,
+        helpful: row.helpful
+      }
+    }), { fields: ['id', 'question_id', 'body', 'date_added', 'answerer', 'reported', 'helpful']}));
+  } )
 
   csvToJSON().fromFile('db/data/answers_photos.csv')
   .then((testFile) => {
