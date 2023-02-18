@@ -1,11 +1,15 @@
-const { Client } = require('pg');
+const { Pool } = require('pg');
 const dotenv = require('dotenv');
 
-const client = new Client({
+const pool = new Pool({
   user: process.env.DB_USER,
   port: process.env.DB_PORT,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME
 });
 
-module.exports = client;
+pool.connect()
+  .then(() => console.log('DB successfully connected'))
+  .catch((err) => console.error(err))
+
+module.exports = pool;
