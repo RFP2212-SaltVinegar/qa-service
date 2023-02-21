@@ -10,7 +10,6 @@ module.exports = {
       if (err) {
         res.send(err)
       } else {
-        console.log('POST RESPONSE: ', data);
         res.send(data)
       }
     })

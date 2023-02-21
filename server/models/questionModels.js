@@ -7,6 +7,8 @@ module.exports = {
     `INSERT INTO
     questions (product_id, body, date_added, asker, email, reported, helpful)
     values ($1, $2, $3, $4, $5, $6, $7)`;
+    const questionID =
+    `SELECT setval('questions_id_seq', (SELECT MAX(id) FROM questions))`;
     pool.query(
       query2,
       [product_id, body, date, name, email, false, 0],
@@ -24,7 +26,8 @@ module.exports = {
   //up to 4 on page load
   getQFromDB: (prodID, quantity, offset, cb) => {
     const query1 =
-    `SELECT array_to_json(array_agg(row_to_json(question_alias))) FROM (SELECT * FROM questions
+    `SELECT array_to_json(array_agg(row_to_json(question_alias)))
+    FROM (SELECT * FROM questions
     WHERE product_id = $1
     AND reported = ${false}
     LIMIT $2 OFFSET $3) question_alias`;
