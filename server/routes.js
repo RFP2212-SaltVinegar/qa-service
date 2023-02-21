@@ -5,7 +5,7 @@ const controller = require('./controllers');
 router.post('/qa/questions', controller.createQ);
 router.post('/qa/question/:question_id/answers', controller.createA);
 
-router.get('/qa/questions?:product_id', controller.get);
+router.get('/qa/questions', controller.get);
 
 router.put('/qa/questions/:question_id/report', controller.updateQR);
 router.put('/qa/questions/:question_id/helpful', controller.updateQH);
