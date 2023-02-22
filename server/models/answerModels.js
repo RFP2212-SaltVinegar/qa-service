@@ -40,5 +40,19 @@ module.exports = {
       }
     )
   },
-  updateAHelpfulDB: () => {}
+  updateAHelpfulDB: (answer_id, cb) => {
+    pool.query(
+      `UPDATE answers
+      SET helpful = helpful + 1
+      WHERE id = $1`,
+      [answer_id],
+      (err, result) => {
+        if(err) {
+          cb(err);
+        } else {
+          cb(null, result);
+        }
+      }
+    )
+  }
 }

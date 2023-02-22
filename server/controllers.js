@@ -63,20 +63,45 @@ module.exports = {
       }
     })
   },
-  updateQH: () => {},
-  updateAR: (req, res) => {
-        // MAKE SURE AN ANSWER ID IS INCLUDED
-        if (!req.params.answer_id) {
-          res.status(400).send('answer_id required')
-        }
-        answerModel.updateAReportDB(req.params.answer_id, (err, data) => {
-          if (err) {
-            console.log('ERROR: ', err);
-            res.send(err)
-          } else {
-            res.send(data)
-          }
-        })
+  updateQH: (req, res) => {
+    // MAKE SURE A QUESTION ID IS INCLUDED
+    if (!req.params.question_id) {
+      res.status(400).send('question_id required')
+    }
+    questionModel.updateQHelpfulDB(req.params.question_id, (err, data) => {
+      if (err) {
+        res.send(err)
+      } else {
+        res.send(data)
+      }
+    })
   },
-  updateAH: () => {}
+  updateAR: (req, res) => {
+    // MAKE SURE AN ANSWER ID IS INCLUDED
+    if (!req.params.answer_id) {
+      res.status(400).send('answer_id required')
+    }
+    answerModel.updateAReportDB(req.params.answer_id, (err, data) => {
+      if (err) {
+        console.log('ERROR: ', err);
+        res.send(err)
+      } else {
+        res.send(data)
+      }
+    })
+  },
+  updateAH: (req, res) => {
+    // MAKE SURE AN ANSWER ID IS INCLUDED
+    if (!req.params.answer_id) {
+      res.status(400).send('answer_id required')
+    }
+    answerModel.updateAHelpfulDB(req.params.answer_id, (err, data) => {
+      if (err) {
+        console.log('ERROR: ', err);
+        res.send(err)
+      } else {
+        res.send(data)
+      }
+    })
+  }
 }

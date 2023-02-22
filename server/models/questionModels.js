@@ -56,5 +56,19 @@ module.exports = {
       }
     )
   },
-  updateQHelpfulDB: () => {}
+  updateQHelpfulDB: (question_id, cb) => {
+    pool.query(
+      `UPDATE questions
+      SET helpful = helpful + 1
+      WHERE id = $1`,
+      [question_id],
+      (err, result) => {
+        if(err) {
+          cb(err);
+        } else {
+          cb(null, result);
+        }
+      }
+    )
+  }
 }
