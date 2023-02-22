@@ -23,19 +23,55 @@ module.exports = {
   //up to 4 on page load
   getQFromDB: (prodID, quantity, offset, cb) => {
     const query1 =
-    `SELECT array_to_json(array_agg(row_to_json(question_alias)))
-    FROM (SELECT * FROM questions
-    WHERE product_id = $1
-    AND reported = ${false}
-    LIMIT $2 OFFSET $3) question_alias`;
+    `SELECT json_build_object(
+      'product_id', ${prodID},
+      'results', (
+        WITH questionRows AS (
+          SELECT * FROM questions
+          WHERE product_id = ${prodID}
+          AND reported = false
+          LIMIT ${quantity} OFFSET ${offset}
+          )
+        SELECT COALESCE(json_agg(json_build_object(
+          'question_id', id,
+          'question_body', body,
+          'question_date', date_added,
+          'asker_name', asker,
+          'question_helpfulness', helpful,
+          'reported', reported,
+          'answers', (
+            WITH answerRows AS (
+              SELECT * FROM answers
+              WHERE question_id = questionRows.id
+              AND reported = false
+              )
+            SELECT COALESCE(json_object_agg(
+              id, json_build_object(
+                'id', id,
+                'body', body,
+                'date', date_added,
+                'answerer_name', answerer,
+                'helpfulness', helpful,
+                'photos', (
+                  WITH photoRows AS (
+                    SELECT * FROM answer_photos
+                    WHERE answer_id = answerRows.id
+                    )
+                  SELECT COALESCE(json_agg(url), '[]'::json) FROM photoRows
+                )
+              )
+            ), '{}'::json) FROM answerRows
+          )
+        )), '[]'::json) FROM questionRows
+      )
+    )`;
     pool.query(
       query1,
-      [prodID, quantity, offset],
       (err, result) => {
         if(err) {
           cb(err);
         } else {
-          cb(null, result.rows[0]['array_to_json']);
+          cb(null, result.rows[0]['json_build_object']);
         }
       }
     )
