@@ -1,4 +1,5 @@
 const questionModel = require('./models/questionModels.js');
+const answerModel = require('./models/answerModels.js');
 
 module.exports = {
   createQ: (req, res) => {
@@ -37,8 +38,33 @@ module.exports = {
       }
     })
   },
-  updateQR: () => {},
+  updateQR: (req, res) => {
+    // MAKE SURE A QUESTION ID IS INCLUDED
+    if (!req.params.question_id) {
+      res.status(400).send('question_id required')
+    }
+    questionModel.updateQReportDB(req.params.question_id, (err, data) => {
+      if (err) {
+        res.send(err)
+      } else {
+        res.send(data)
+      }
+    })
+  },
   updateQH: () => {},
-  updateAR: () => {},
+  updateAR: (req, res) => {
+        // MAKE SURE AN ANSWER ID IS INCLUDED
+        if (!req.params.answer_id) {
+          res.status(400).send('answer_id required')
+        }
+        answerModel.updateAReportDB(req.params.answer_id, (err, data) => {
+          if (err) {
+            console.log('ERROR: ', err);
+            res.send(err)
+          } else {
+            res.send(data)
+          }
+        })
+  },
   updateAH: () => {}
 }

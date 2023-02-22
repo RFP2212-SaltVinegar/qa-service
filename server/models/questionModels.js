@@ -36,7 +36,6 @@ module.exports = {
       [prodID, quantity, offset],
       (err, result) => {
         if(err) {
-          console.log('ERR: ', err);
           cb(err);
         } else {
           cb(null, result.rows[0]['array_to_json']);
@@ -45,6 +44,20 @@ module.exports = {
     )
   },
 
-  updateQReportDB: () => {},
+  updateQReportDB: (question_id, cb) => {
+    pool.query(
+      `UPDATE questions
+      SET reported = ${true}
+      WHERE id = $1`,
+      [question_id],
+      (err, result) => {
+        if(err) {
+          cb(err);
+        } else {
+          cb(null, result);
+        }
+      }
+    )
+  },
   updateQHelpfulDB: () => {}
 }
