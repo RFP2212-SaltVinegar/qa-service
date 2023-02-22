@@ -22,7 +22,25 @@ module.exports = {
   },
 
   //up to 2/question on page load
-  getAFromDB: () => {},
+  getAFromDB: (question_id, quantity, offset, cb) => {
+    const query2 =
+    `SELECT array_to_json(array_agg(row_to_json(answer_alias)))
+    FROM (SELECT * FROM answers
+    WHERE question_id = $1
+    AND reported = ${false}
+    LIMIT $2 OFFSET $3) answer_alias`;
+    pool.query(
+      query2,
+      [question_id, quantity, offset],
+      (err, result) => {
+        if(err) {
+          cb(err);
+        } else {
+          cb(null, result.rows[0]['array_to_json']);
+        }
+      }
+    )
+  },
   updateAReportDB: (answer_id, cb) => {
     pool.query(
       `UPDATE answers
