@@ -15,7 +15,19 @@ module.exports = {
       }
     })
   },
-  createA: () => {},
+  createA: (req, res) => {
+    // MAKE SURE A QUESTION ID IS INCLUDED
+    if (!req.params.question_id) {
+      res.status(400).send('question_id required')
+    }
+    answerModel.addAnswerDB(req.params.question_id, req.body, (err, data) => {
+      if (err) {
+        res.send(err)
+      } else {
+        res.send(data)
+      }
+    })
+  },
   get: (req, res) => {
     // EXTRACT QUERY PARAMETERS FROM ROUTE
     let { product_id, page, count } = req.query;

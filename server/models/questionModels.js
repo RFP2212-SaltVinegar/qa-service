@@ -7,14 +7,11 @@ module.exports = {
     `INSERT INTO
     questions (product_id, body, date_added, asker, email, reported, helpful)
     values ($1, $2, $3, $4, $5, $6, $7)`;
-    const questionID =
-    `SELECT setval('questions_id_seq', (SELECT MAX(id) FROM questions))`;
     pool.query(
       query2,
       [product_id, body, date, name, email, false, 0],
       (err, result) => {
         if(err) {
-          console.log('ERR: ', err);
           cb(err);
         } else {
           cb(null, result);
