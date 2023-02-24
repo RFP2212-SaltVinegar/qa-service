@@ -15,6 +15,8 @@ CREATE TABLE questions (
   helpful INTEGER DEFAULT 0
 );
 
+CREATE INDEX questions_product_id_idx ON questions(product_id);
+
 COPY questions
 FROM '/Users/archaareads/Documents/Code/SDC/qa-service/db/data/questions.csv'
 DELIMITER ','
@@ -32,6 +34,8 @@ CREATE TABLE answers (
   FOREIGN KEY (question_id) REFERENCES questions(id)
 );
 
+CREATE INDEX answers_question_id_idx ON answers(question_id);
+
 COPY answers
 FROM '/Users/archaareads/Documents/Code/SDC/qa-service/db/data/answers.csv'
 DELIMITER ','
@@ -43,6 +47,8 @@ CREATE TABLE answer_photos (
   url VARCHAR(2048),
   FOREIGN KEY (answer_id) REFERENCES answers(id)
 );
+
+CREATE INDEX photos_answer_id_idx ON answer_photos(answer_id);
 
 COPY answer_photos
 FROM '/Users/archaareads/Documents/Code/SDC/qa-service/db/data/answersPhotosTransformed.csv'

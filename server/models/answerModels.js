@@ -49,10 +49,8 @@ module.exports = {
       [answer_id],
       (err, result) => {
         if(err) {
-          console.log('ERR: ', err);
           cb(err);
         } else {
-          console.log('MODEL SUCESS: ', result);
           cb(null, result);
         }
       }
