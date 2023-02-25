@@ -5,11 +5,11 @@ module.exports = {
   createQ: (req, res) => {
     // MAKE SURE A PRODUCT ID IS INCLUDED
     if (!req.body.product_id) {
-      res.status(400).send('product_id required')
+      res.status(500).send('product_id required')
     }
     questionModel.addQuestionDB(req.body, (err, data) => {
       if (err) {
-        res.send(err)
+        res.status(400).send(err)
       } else {
         res.send(data)
       }
@@ -18,11 +18,11 @@ module.exports = {
   createA: (req, res) => {
     // MAKE SURE A QUESTION ID IS INCLUDED
     if (!req.params.question_id) {
-      res.status(400).send('question_id required')
+      res.status(500).send('question_id required')
     }
     answerModel.addAnswerDB(req.params.question_id, req.body, (err, data) => {
       if (err) {
-        res.send(err)
+        res.status(400).send(err)
       } else {
         res.send(data)
       }
@@ -34,7 +34,7 @@ module.exports = {
 
     // MAKE SURE A PRODUCT ID IS INCLUDED
     if (!product_id) {
-      res.status(400).send('product_id required')
+      res.status(500).send('product_id required')
     }
 
     // SET ALL QUERY PARAMETERS TO INTEGERS
@@ -44,7 +44,7 @@ module.exports = {
 
     questionModel.getQFromDB(product_id, count, page,(err, data) => {
       if (err) {
-        res.send(err)
+        res.status(400).send(err)
       } else {
         res.send(data)
       }
@@ -53,11 +53,11 @@ module.exports = {
   updateQR: (req, res) => {
     // MAKE SURE A QUESTION ID IS INCLUDED
     if (!req.params.question_id) {
-      res.status(400).send('question_id required')
+      res.status(500).send('question_id required')
     }
     questionModel.updateQReportDB(req.params.question_id, (err, data) => {
       if (err) {
-        res.send(err)
+        res.status(400).send(err)
       } else {
         res.send(data)
       }
@@ -66,11 +66,11 @@ module.exports = {
   updateQH: (req, res) => {
     // MAKE SURE A QUESTION ID IS INCLUDED
     if (!req.params.question_id) {
-      res.status(400).send('question_id required')
+      res.status(500).send('question_id required')
     }
     questionModel.updateQHelpfulDB(req.params.question_id, (err, data) => {
       if (err) {
-        res.send(err)
+        res.status(400).send(err)
       } else {
         res.send(data)
       }
@@ -79,12 +79,11 @@ module.exports = {
   updateAR: (req, res) => {
     // MAKE SURE AN ANSWER ID IS INCLUDED
     if (!req.params.answer_id) {
-      res.status(400).send('answer_id required')
+      res.status(500).send('answer_id required')
     }
     answerModel.updateAReportDB(req.params.answer_id, (err, data) => {
       if (err) {
-        console.log('ERROR: ', err);
-        res.send(err)
+        res.status(400).send(err)
       } else {
         res.send(data)
       }
@@ -93,12 +92,11 @@ module.exports = {
   updateAH: (req, res) => {
     // MAKE SURE AN ANSWER ID IS INCLUDED
     if (!req.params.answer_id) {
-      res.status(400).send('answer_id required')
+      res.status(500).send('answer_id required')
     }
     answerModel.updateAHelpfulDB(req.params.answer_id, (err, data) => {
       if (err) {
-        console.log('ERROR: ', err);
-        res.send(err)
+        res.status(400).send(err)
       } else {
         res.send(data)
       }
