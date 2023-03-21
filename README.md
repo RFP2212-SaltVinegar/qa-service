@@ -39,7 +39,10 @@ This microservice handles requests from the following routes related to the ques
 
 ### loader.io Testing
 
-# Installation:
+## Relational Database Schema Design
+![Screen Shot 2023-03-21 at 4 43 51 PM](https://user-images.githubusercontent.com/115492619/226767382-2b3f21a5-de89-427f-8a0e-d23849387e1f.png)
+
+## Installation:
 
 ### Install Dependencies
 - run the command `npm install` in the project root.
