@@ -19,7 +19,7 @@ A modernized back end system able to withstand web scale traffic loads for an ex
   <img src='https://custom-icon-badges.demolab.com/badge/Loader.io-40AEF0.svg?style=for-the-badge&logo=loader_io&logoColor=white' />
 </div>
 
-# Route Endpoints
+## Route Endpoints
 This microservice handles requests from the following routes related to the question and answer section of the retail site:
   - <code>/qa/questions</code>
   - <code>/qa/questions/:question_id/answers</code>
@@ -28,6 +28,17 @@ This microservice handles requests from the following routes related to the ques
   - <code>/qa/answers/:answer_id/report</code>
   - <code>/qa/answers/:answer_id/helpful</code>
   
+## Performance Testing
+
+### Postman Testing
+![speedTestInitial](https://user-images.githubusercontent.com/115492619/226761612-cc04d52c-7307-4b2d-9c5b-d71504a68e8f.png)
+
+### k6 Testing
+![k6-initialLocalStressTest_PUT-only](https://user-images.githubusercontent.com/115492619/226761355-90f60cde-25e9-443f-bbf6-5dfd7d0f2ddf.png)
+![pass-localStressTest](https://user-images.githubusercontent.com/115492619/226761377-fb87bae5-5a5e-473c-a7a6-a3e9561c1315.png)
+
+### loader.io Testing
+
 # Installation:
 
 ### Install Dependencies
